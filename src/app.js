@@ -32,7 +32,7 @@ const newApp = {
         todosView.addEventListener("change", todoList.toggleCompletedHandler); // event delegation!
         todosView.addEventListener("click", todoList.deleteTodoHandler);
         todosView.addEventListener("dblclick", todoList.editTodoHandler);
-        renderedTodoList.appendChild(todosView)
+        //renderedTodoList.appendChild(todosView)
 
         //clean input field
 
