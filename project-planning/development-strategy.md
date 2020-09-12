@@ -63,18 +63,15 @@ __As a user I want to be able to add new Todo__
 
 #### DATA
 
-- Define a todo class to store information and methods if necessary for todos'.
-- Define a state object to restore todos', other necessary data and methods if necessary.
-- Define a todoList array inside the state object.
-- Add a `addTodo` method to state object which will create a new to do from todo class and add it to the `todos` array inside the state object.
+- Add a `addTodo` method to TodoList class.
 
 #### LISTENER
 
-- Add a listener function to the `init.js` which listens input field for `submit` events and calls the handler `hamdlers.addTodo()` method.
 
 #### HANDLER
 
-- Add a `addTodo` method to the `handlers` object which reads user input from the input field and passes it into `state.addTodo()` method, the calls `handler.displayTodos()` method to render new to do to the page. 
+- Add addTodoHandler.
+
 
 ## 3. User Story: Toggle Done
 
