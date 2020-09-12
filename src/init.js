@@ -1,7 +1,21 @@
 'use strict';
 
-import { createNewListHandler } from './handlers/create-new-list.js'
+import { newApp } from './app.js'
+import { logger } from '../lib/logger.js'
 
 
-document.getElementById('list-name-input')
-  .addEventListener('keyup', createNewListHandler);
+window.onload = () => {
+    document
+        .getElementById("add-new")
+        .addEventListener("keyup", newApp.addNewTodoListHandler);
+
+    console.log("app:", newApp);
+
+
+    // log the initiation
+    logger.push({
+        state: newApp.state,
+        newApp,
+        //view: todosView,
+    });
+};

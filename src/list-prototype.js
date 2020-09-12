@@ -12,15 +12,101 @@
   You will need to use binding (or arrow functions) to connect handlers to views
 
 */
-
-export const listPrototype = {
-  printState: function () {
-    console.log(this.state.name);
-  },
-  render: function () {
-    const buttonEl = document.createElement('button');
-    buttonEl.innerHTML = this.state.name;
-    buttonEl.addEventListener('click', this.printState.bind(this));
-    return buttonEl;
-  }
+class Todo {
+    constructor(text) {
+        this.text = text;
+        this.completed = false;
+    }
 };
+
+class TodoList {
+    constructor(name) {
+        this.name = name;
+    }
+
+
+    _state = {
+        todos: []
+    }
+
+    get state() {
+        return this._state;
+    }
+
+    set state(newState) {
+        this._state = newState
+    }
+
+    renderAddTodoInput() {
+        //container
+        const div = document.createElement('div');
+        div.classList.add('container');
+        div.id = this.name;
+
+        //page title
+        const h1 = document.createElement('h1');
+        h1.textContent = this.name;
+
+        //toggle button
+        const toggleButton = document.createElement('button');
+        toggleButton.id = 'toggle-button'
+        toggleButton.innerText = 'V'
+
+
+        //input field
+
+        const input = document.createElement('input');
+        input.type = 'text';
+
+        //append to div
+        div.appendChild(h1);
+        div.appendChild(toggleButton)
+        div.appendChild(input);
+
+        return div;
+
+    }
+
+    renderTodos(todosArr) {
+        const ulEl = document.createElement('ul');
+
+
+        for (const todo of todosArr) {
+            //create <li>
+            const liEl = document.createElement('li');
+            liEl.classList.add('todo-item');
+            liEl.setAttribute('data-index', todosArr.indexOf(todo));
+
+
+            //Create and add checkbox
+            const checkBoxEl = document.createElement('input');
+            checkBoxEl.type = 'checkbox';
+            if (todo.completed) {
+                checkBoxEl.setAttribute('checked', true);
+            }
+            checkBoxEl.setAttribute('data-index', todosArr.indexOf(todo));
+            liEl.appendChild(checkBoxEl);
+
+            //create todo body
+
+            const p = document.createElement('p')
+            p.innerText = todo.text;
+
+            liEl.appendChild(p);
+
+            //create delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.type = 'button'
+            deleteButton.classList.add('delete')
+            deleteButton.setAttribute('data-index', todosArr.indexOf(todo))
+            deleteButton.innerText = 'X'
+
+            liEl.appendChild(deleteButton)
+            ulEl.appendChild(liEl);
+        }
+
+        return ulEl;
+    }
+}
+
+export { TodoList }
