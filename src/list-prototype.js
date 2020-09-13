@@ -173,6 +173,29 @@ class TodoList {
 
         console.log('logs', logger.logs)
     }
+    
+   // remove todo
+    deleteTodo(position) {
+    this._state.todos.splice(position, 1)
+    } 
+
+    // delete todo handler
+    deleteTodoHandler = (event) => {
+    debugger;
+    // event delegation!
+    const target = event.target;
+    if (target.nodeName !== 'BUTTON') {
+    return;
+    }
+    const todoIndex = Number(target.parentElement.dataset.index);
+    const removedToDo = this._state.todos[todoIndex].text;
+    this.deleteTodo(todoIndex);
+    const todos = this.renderTodos(this._state.todos);
+    const id = `${this.name}-todos`;
+    document.getElementById(id).innerHTML= '';
+    document.getElementById(id).appendChild(todos);
+    
+    };
 
 }
 
