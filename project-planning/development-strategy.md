@@ -103,19 +103,17 @@ __As a user I would like to be able to delete todos__
 
 #### DATA
 
-- Add a `deleteTodo` method to the state object which deletes the corresponding todo object from the todolist.
+- Add a `deleteTodo` method to the TodoList class which deletes the corresponding todo object from the todolist.
 
 #### HANDLER
 
-- Add a `deleteTodo` method to the `handlers` object which, after delete button is clicked, reads the index of the corresponding todo and passes it to `state.deleteTodo` method to remove from `state.todoList` and then calls the `handlers.displayTodos` method.
+- Add a `deleteTodoHandler` method to the TodoList class.
 
 #### VIEW
 
-- Add HTML template rendered by `view.renderTodo` method a delete button which has a `data-index` attribute matches with the index of the todo object inside `state.todoList` array.
+
 
 #### LISTENER
-
-- Add a listener function to the `init.js` file which listens whole todo list for the click events and if `event.target` is a delete button calls the `handlers.deleteTodo`. 
 
 ## 5. User Story: Toggle Done All
 
