@@ -58,10 +58,15 @@ class TodoList {
         const input = document.createElement('input');
         input.type = 'text';
 
+        // add todos div
+        const todosDivEl = document.createElement('div');
+        todosDivEl.id = `${this.name}-todos`;
+
         //append to div
         div.appendChild(h1);
         div.appendChild(toggleButton)
         div.appendChild(input);
+        div.appendChild(todosDivEl);
 
         return div;
 
@@ -107,6 +112,35 @@ class TodoList {
 
         return ulEl;
     }
+
+    // add new todo item
+    addTodo(text) {
+        const newTodo = new Todo(text);
+        this._state.todos.push(newTodo);
+
+    }
+
+    // add new todo item handler
+    addTodoHandler = (event) => {
+
+        if (event.key !== 'Enter') return;
+        //read from user
+        const input = event.target.value;
+
+        //update state
+
+        this.addTodo(input);
+
+        // populate DOM
+        const todos = this.renderTodos(this._state.todos);
+        
+        const id = `${this.name}-todos`;
+        document.getElementById(id).innerHTML= '';
+        document.getElementById(id).appendChild(todos);
+        event.target.value = '';
+
+    }
+
 }
 
 export { TodoList }
