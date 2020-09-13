@@ -12,6 +12,8 @@
   You will need to use binding (or arrow functions) to connect handlers to views
 
 */
+
+import { logger } from '../lib/logger.js'
 class Todo {
     constructor(text) {
         this.text = text;
@@ -133,12 +135,43 @@ class TodoList {
 
         // populate DOM
         const todos = this.renderTodos(this._state.todos);
-        
+
         const id = `${this.name}-todos`;
-        document.getElementById(id).innerHTML= '';
+        document.getElementById(id).innerHTML = '';
         document.getElementById(id).appendChild(todos);
         event.target.value = '';
 
+    }
+
+    toggleCompleted(position) {
+        if (position < 0 || this._state.todos.length <= position) {
+            return;
+        }
+        const todo = this._state.todos[position];
+        todo.completed = !todo.completed;
+    }
+
+    toggleCompletedHandler = (event) => {
+        // event delegation!
+        const target = event.target;
+        if (target.nodeName !== 'INPUT' && target.type !== 'checkbox') {
+            return;
+        }
+
+        // update state using app method
+        const todoIndex = Number(target.dataset.index);
+        this.toggleCompleted(todoIndex);
+
+
+        //developer logs
+        logger.push({
+            action: 'toggle todo',
+            event,
+            todoIndex,
+            state: this.state
+        });
+
+        console.log('logs', logger.logs)
     }
 
 }
