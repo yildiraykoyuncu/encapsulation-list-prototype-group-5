@@ -30,7 +30,8 @@ const newApp = {
 
         const todosView = todoList.renderTodos(todoList.state.todos)
         todosView.addEventListener("change", todoList.toggleCompletedHandler); // event delegation!
-        todosView.addEventListener("click", todoList.deleteTodoHandler);
+        const id = `${name}-todos`
+        document.getElementById(id).addEventListener("click", todoList.deleteTodoHandler);
         todosView.addEventListener("dblclick", todoList.editTodoHandler);
         //renderedTodoList.appendChild(todosView)
 
