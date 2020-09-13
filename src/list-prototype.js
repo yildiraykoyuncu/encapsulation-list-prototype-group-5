@@ -173,30 +173,51 @@ class TodoList {
 
         console.log('logs', logger.logs)
     }
-    
-   // remove todo
+
+    // remove todo
     deleteTodo(position) {
-    this._state.todos.splice(position, 1)
-    } 
+        this._state.todos.splice(position, 1)
+    }
 
     // delete todo handler
     deleteTodoHandler = (event) => {
-    debugger;
-    // event delegation!
-    const target = event.target;
-    if (target.nodeName !== 'BUTTON') {
-    return;
-    }
-    const todoIndex = Number(target.parentElement.dataset.index);
-    const removedToDo = this._state.todos[todoIndex].text;
-    this.deleteTodo(todoIndex);
-    const todos = this.renderTodos(this._state.todos);
-    const id = `${this.name}-todos`;
-    document.getElementById(id).innerHTML= '';
-    document.getElementById(id).appendChild(todos);
-    
-    };
 
+        // event delegation!
+        const target = event.target;
+        if (target.nodeName !== 'BUTTON') {
+            return;
+        }
+        const todoIndex = Number(target.parentElement.dataset.index);
+        const removedToDo = this._state.todos[todoIndex].text;
+        this.deleteTodo(todoIndex);
+        const todos = this.renderTodos(this._state.todos);
+        const id = `${this.name}-todos`;
+        document.getElementById(id).innerHTML = '';
+        document.getElementById(id).appendChild(todos);
+
+    }
+
+    toggleAllHandler = (event) => {
+        const todosArr = this.state.todos;
+        const id = `${this.name}-todos`;
+        //update state and dom
+        if (todosArr.every(todo => todo.completed === true)) {
+            todosArr.forEach((todo, i) => {
+                todo.completed = false;
+                const selector = `div#${id} input[data-index="${i}"]`
+                document.querySelector(selector).checked = false;
+                console.log(selector)
+            })
+        } else {
+            todosArr.forEach((todo, i) => {
+                todo.completed = true;
+                const selector = `div#${id} input[data-index="${i}"]`
+                document.querySelector(selector).checked = true;
+                console.log(selector)
+            })
+        }
+
+    }
 }
 
 export { TodoList }
